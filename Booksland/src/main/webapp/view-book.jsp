@@ -43,6 +43,11 @@
                            class="btn btn-outline-secondary">
                             Return to books
                         </a>
+
+                        <a href="<%= request.getContextPath() %>/edit-book?id=<%= book.getId() %>"
+                           class="btn btn-outline-primary">
+                            Edit book
+                        </a>
                     </div>
                 </div>
             </div>
