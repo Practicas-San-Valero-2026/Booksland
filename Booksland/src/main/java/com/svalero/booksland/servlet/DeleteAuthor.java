@@ -38,13 +38,7 @@ public class DeleteAuthor extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-
-            response.getWriter().println(
-                    "<div class='alert alert-danger' role='alert'>" +
-                            "It has been impossible to remove the author because it may have registered books." +
-                            "</div>" +
-                            "<a href='authors' class='btn btn-secondary'>Return to authors</a>"
-            );
+            response.sendRedirect("authors?error=author-has-books");
         }
     }
 }

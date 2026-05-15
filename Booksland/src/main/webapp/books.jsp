@@ -76,7 +76,9 @@
                                     </div>
 
                                     <div class="col-4 d-grid">
-                                        <a href="delete-book?id=<%= book.getId() %>" class="btn btn-outline-danger">
+                                        <a href="remove-book?id=<%= book.getId() %>"
+                                           class="btn btn-outline-danger"
+                                           onclick="return confirm('Are you sure you want to delete this book?');">
                                             Delete
                                         </a>
                                     </div>

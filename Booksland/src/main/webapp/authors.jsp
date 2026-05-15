@@ -7,9 +7,19 @@
     <%
         List<Author> authors = (List<Author>) request.getAttribute("authors");
         String search = (String) request.getAttribute("search");
+        String error = request.getParameter("error");
 
         if (search == null) search = "";
     %>
+
+    <% if ("author-has-books".equals(error)) { %>
+    <div class="container mt-4">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Author could not be deleted.</strong>
+            This author has registered books. Delete those books first before removing the author.
+        </div>
+    </div>
+    <% } %>
 
     <section class="py-4 text-center container">
         <div class="row py-lg-3">
@@ -76,7 +86,9 @@
                                     </div>
 
                                     <div class="col-4 d-grid">
-                                        <a href="delete-author?id=<%= author.getId() %>" class="btn btn-outline-danger">
+                                        <a href="remove-author?id=<%= author.getId() %>"
+                                           class="btn btn-outline-danger"
+                                           onclick="return confirm('Are you sure you want to delete this author?');">
                                             Delete
                                         </a>
                                     </div>
