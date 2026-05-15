@@ -10,5 +10,6 @@ public class Book {
     private String genre;
     private int pages;
     private String publisher;
+    private int idAuthor;
 
 }
