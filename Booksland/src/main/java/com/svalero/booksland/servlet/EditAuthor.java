@@ -55,7 +55,7 @@ public class EditAuthor extends HttpServlet {
                     return;
                 }
 
-                authorDAO.modify(nameParam, lastNameParam, nationalityParam, biographyParam);
+                authorDAO.modify(nameParam, lastNameParam, nationalityParam, biographyParam, Integer.parseInt(id));
 
                 sendSuccess(response, "Author modified correctly");
             }
