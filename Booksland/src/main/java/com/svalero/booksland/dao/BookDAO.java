@@ -9,6 +9,7 @@ import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 import java.util.List;
 
 public interface BookDAO {
+
     // Insert
     @SqlUpdate("INSERT INTO books (title, genre, pages, publisher, id_author) VALUES (?, ?, ?, ?, ?)")
     void add(String title, String genre, int pages, String publisher, int idAuthor);
@@ -37,7 +38,7 @@ public interface BookDAO {
     List<Book> getByAuthor(int idAuthor);
 
     // search
-    @SqlQuery("SELECT * FROM books WHERE title LIKE CONCAT('%', ?, '%') AND (? = 0 OR id_author = ?)")
+    @SqlQuery("SELECT * FROM books WHERE title LIKE CONCAT('%', ?, '%')")
     @UseRowMapper(BookMapper.class)
-    List<Book> search(String title, int idAuthor);
+    List<Book> search(String title);
 }
