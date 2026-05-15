@@ -38,10 +38,10 @@
                     </h2>
 
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="/books" class="btn btn-secondary btn-lg px-4">
+                        <a href="<%= contextPath %>/books" class="btn btn-secondary btn-lg px-4">
                             Books
                         </a>
-                        <a href="/authors" class="btn btn-outline-secondary btn-lg px-4">
+                        <a href="<%= contextPath %>/authors" class="btn btn-outline-secondary btn-lg px-4">
                             Authors
                         </a>
                     </div>

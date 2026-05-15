@@ -26,33 +26,22 @@ public class ListAuthor extends HttpServlet {
 
             AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
 
-            // get, validate and formar every input
-            String name = request.getParameter("name");
-            String lastName = request.getParameter("last_name");
+            String search = request.getParameter("search");
 
-            if (name == null) {
-                name = "";
+            if (search == null) {
+                search = "";
             }
 
-            if (lastName == null) {
-                lastName = "";
-            }
+            List<Author> authors = authorDAO.search(search, "");
 
-            List<Author> authors = authorDAO.search(name, lastName);
-
-            // Send data to JSP
             request.setAttribute("authors", authors);
-            request.setAttribute("name", name);
-            request.setAttribute("lastName", lastName);
+            request.setAttribute("search", search);
 
-            // Send response to JSP
             request.getRequestDispatcher("authors.jsp").forward(request, response);
-
 
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(500, "Error: it has been impossible to connect to the database");
         }
-
     }
 }
