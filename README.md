@@ -27,7 +27,10 @@ El objetivo principal es desarrollar una aplicación web que permita interactuar
 - Maven
 
 ### Frontend
+- HTML
+- CSS
 - Bootstrap
+- JSP
 
 ### Base de datos
 - MariaDB
@@ -89,14 +92,54 @@ mvn tomcat7:redeploy
 ```
 3. Abrir el navegador y acceder a:
    ```text
-   http://localhost:8080/Respawn-Store
+   http://localhost:8080/Booksland
    ```
+
+## Estructura del proyecto
+
+La aplicación sigue una estructura basada en separación de responsabilidades:
+
+* `src/main/java/com/svalero/booksland`
+   * `dao`
+     * `AuthorDAO.java`
+     * `BookDAO.java`
+     * `Database.java`
+   * `mapper`
+     * `AuthorMapper.java`
+     * `BookMapper.java`
+   * `model`
+     * `Author.java`
+     * `Book.java`
+   * `servlet`
+     * `DeleteAuthor.java`
+     * `DeleteBook.java`
+     * `EditAuthor.java`
+     * `EditBook.java`
+     * `ListAuthor.java`
+     * `ListBook.java`
+     * `ViewAuthor.java`
+     * `ViewBooks.java`
+
+Las páginas JSP se encuentran en:
+
+* `src/main/webapp`
+  * `includes`
+    * `footer.jsp`
+    * `header.jsp`
+  * `WEB-INF`
+    * `authors.jsp`
+    * `books.jsp`
+    * `edit-author.jsp`
+    * `edit-book.jsp`
+    * `index.jsp`
+    * `view-author.jsp`
+    * `view-book.jsp`
 
 ### Pasos de instalación
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/axel-617/Respawn-Store-AA2.git
+git clone https://github.com/Practicas-San-Valero-2026/Booksland.git
 ```
 
 2. Importar la base de datos en MariaDB usando el archivo SQL incluido en el proyecto.
