@@ -20,7 +20,7 @@ public interface AuthorDAO {
 
     // Update
     @SqlUpdate("UPDATE authors SET name = ?, last_name = ?, nationality = ?, biography = ? WHERE id = ?")
-    void modify(String name, String lastName, String nationality, String biography);
+    void modify(String name, String lastName, String nationality, String biography, int id);
 
     // List
     @SqlQuery("SELECT * FROM authors")
@@ -33,7 +33,7 @@ public interface AuthorDAO {
     Author getById(int id);
 
     // search
-    @SqlQuery("SELECT * FROM author WHERE name LIKE CONCAT('%', ?, '%') AND last_name LIKE CONCAT('%', ?, '%')")
+    @SqlQuery("SELECT * FROM authors WHERE name LIKE CONCAT('%', ?, '%') AND last_name LIKE CONCAT('%', ?, '%')")
     @UseRowMapper(AuthorMapper.class)
     List<Author> search(String name, String lastName);
 }

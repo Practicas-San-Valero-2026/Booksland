@@ -19,7 +19,7 @@ public interface BookDAO {
 
     // Update
     @SqlUpdate("UPDATE books SET title = ?, genre = ?, pages = ?, publisher = ?, id_author = ? WHERE id = ?")
-    void modify(String title, String genre, int pages, String publisher, int idAuthor);
+    void modify(String title, String genre, int pages, String publisher, int idAuthor, int id);
 
     // List
     @SqlQuery("SELECT * FROM books")
@@ -31,8 +31,13 @@ public interface BookDAO {
     @UseRowMapper(BookMapper.class)
     Book getById(int id);
 
+    // List books by author
+    @SqlQuery("SELECT * FROM books WHERE id_author = ?")
+    @UseRowMapper(BookMapper.class)
+    List<Book> getByAuthor(int idAuthor);
+
     // search
-    @SqlQuery("SELECT * FROM book WHERE title LIKE CONCAT('%', ?, '%') AND (? = 0 OR id_author = ?)")
+    @SqlQuery("SELECT * FROM books WHERE title LIKE CONCAT('%', ?, '%') AND (? = 0 OR id_author = ?)")
     @UseRowMapper(BookMapper.class)
     List<Book> search(String title, int idAuthor);
 }

@@ -1,7 +1,6 @@
 package com.svalero.booksland.mapper;
 
 import com.svalero.booksland.model.Author;
-import com.svalero.booksland.model.Book;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 

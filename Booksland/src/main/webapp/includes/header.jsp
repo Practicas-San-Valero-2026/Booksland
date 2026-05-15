@@ -32,13 +32,13 @@ boolean isAuthors = currentPath.startsWith(contextPath + "/authors");
                 </a>
             </li>
             <li>
-                <a href="<%= contextPath %>/videogames"
+                <a href="<%= contextPath %>/books"
                    class="nav-link px-2 <%= isBooks ? "active fw-bold text-secondary" : "link-body-emphasis" %>">
                     Books
                 </a>
             </li>
             <li>
-                <a href="<%= contextPath %>/categories"
+                <a href="<%= contextPath %>/authors"
                    class="nav-link px-2 <%= isAuthors ? "active fw-bold text-secondary" : "link-body-emphasis" %>">
                     Authors
                 </a>

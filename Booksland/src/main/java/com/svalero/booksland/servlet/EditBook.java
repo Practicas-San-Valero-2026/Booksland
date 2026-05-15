@@ -1,6 +1,6 @@
 package com.svalero.booksland.servlet;
 
-import com.svalero.booksland.dao.AuthorDAO;
+import com.svalero.booksland.dao.BookDAO;
 import com.svalero.booksland.dao.Database;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,6 +26,7 @@ public class EditBook extends HttpServlet {
         String genreParam = request.getParameter("genre");
         String pagesParam = request.getParameter("pages");
         String publisherParam = request.getParameter("publisher");
+        String idAuthorParam = request.getParameter("idAuthor");
 
         // Validaciones básicas
         if (isEmpty(titleParam)) {
@@ -39,23 +40,37 @@ public class EditBook extends HttpServlet {
         }
 
         if (!isPositiveInt(pagesParam)) {
-            sendError(response, "Missing pages");
+            sendError(response, "Pages must be a number greater than 0");
             return;
         }
-        int pages = Integer.parseInt(pagesParam);
 
         if (isEmpty(publisherParam)) {
             sendError(response, "Missing publisher");
             return;
         }
 
+        if (!isPositiveInt(idAuthorParam)) {
+            sendError(response, "Missing author");
+            return;
+        }
+
+        int pages = Integer.parseInt(pagesParam);
+        int idAuthor = Integer.parseInt(idAuthorParam);
+
         try {
             Database.connect();
-            AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
+
+            BookDAO bookDAO = jdbi.onDemand(BookDAO.class);
 
             if ("Registrar".equals(action)) {
 
-                authorDAO.add(titleParam, genreParam, pagesParam, publisherParam);
+                bookDAO.add(
+                        titleParam,
+                        genreParam,
+                        pages,
+                        publisherParam,
+                        idAuthor
+                );
 
                 sendSuccess(response, "Book successfully added");
 
@@ -66,14 +81,28 @@ public class EditBook extends HttpServlet {
                     return;
                 }
 
-                authorDAO.modify(titleParam, genreParam, pagesParam, publisherParam);
+                if (!isPositiveInt(id)) {
+                    sendError(response, "Invalid book id");
+                    return;
+                }
+
+                int bookId = Integer.parseInt(id);
+
+                bookDAO.modify(
+                        titleParam,
+                        genreParam,
+                        pages,
+                        publisherParam,
+                        idAuthor,
+                        bookId
+                );
 
                 sendSuccess(response, "Book successfully updated");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            sendError(response, "Error while adding Book");
+            sendError(response, "Error while saving book");
         }
     }
 
