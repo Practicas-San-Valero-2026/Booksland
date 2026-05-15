@@ -33,7 +33,7 @@ public interface BookDAO {
     Book getById(int id);
 
     // List books by author
-    @SqlQuery("SELECT * FROM books WHERE id = ?")
+    @SqlQuery("SELECT * FROM books WHERE id_author = ?")
     @UseRowMapper(BookMapper.class)
     List<Book> getByAuthor(int idAuthor);
 
