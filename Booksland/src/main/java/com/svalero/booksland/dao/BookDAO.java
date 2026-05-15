@@ -8,9 +8,9 @@ import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
 import java.util.List;
 
-public class BookDAO {
+public interface BookDAO {
     // Insert
-    @SqlUpdate("INSERT INTO books (title, genre, pages, publisher, id_author" VALUES (?, ?, ?, ?, ?)")
+    @SqlUpdate("INSERT INTO books (title, genre, pages, publisher, id_author) VALUES (?, ?, ?, ?, ?)")
     void add(String title, String genre, int pages, String publisher, int idAuthor);
 
     // Delete

@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class Database {
 
-    private static Jdbi jdbi;
+    public static Jdbi jdbi;
 
     private Database() {
     }

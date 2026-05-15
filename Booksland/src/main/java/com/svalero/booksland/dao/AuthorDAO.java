@@ -8,10 +8,10 @@ import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 
 import java.util.List;
 
-public class AuthorDAO {
+public interface AuthorDAO {
 
     // Insert
-    @SqlUpdate("INSERT INTO authors (name, last_name, nationality, biography" VALUES (?, ?, ?, ?)")
+    @SqlUpdate("INSERT INTO authors (name, last_name, nationality, biography) VALUES (?, ?, ?, ?)")
     void add(String name, String lastName, String nationality, String biography);
 
     // Delete
