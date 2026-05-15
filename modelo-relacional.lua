@@ -1,4 +1,2 @@
-Libros (#id, titulo, genero, paginas, editorial)
-Autores (#id, nombre, apellidos, nacionalidad, biografia)
-
-Libro_Autor(#(-id_libro, -id_autor))
+Books (#id, title, genre, pages, publisher, -id_author)
+Authors (#id, name, last_name, nationality, biography)
