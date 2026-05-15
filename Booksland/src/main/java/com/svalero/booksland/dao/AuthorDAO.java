@@ -32,5 +32,8 @@ public interface AuthorDAO {
     @UseRowMapper(AuthorMapper.class)
     Author getById(int id);
 
-    // TODO search
+    // search
+    @SqlQuery("SELECT * FROM author WHERE name LIKE CONCAT('%', ?, '%') AND last_name LIKE CONCAT('%', ?, '%')")
+    @UseRowMapper(AuthorMapper.class)
+    List<Author> search(String name, String lastName);
 }
