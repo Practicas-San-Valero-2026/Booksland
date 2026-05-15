@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="col-md-2 d-grid">
-                                <a href="<%= contextPath %>/edit-book.jsp" class="btn btn-primary">
+                                <a href="<%= contextPath %>/edit-book" class="btn btn-primary">
                                     Add book
                                 </a>
                             </div>
@@ -70,7 +70,7 @@
                                     </div>
 
                                     <div class="col-4 d-grid">
-                                        <a href="edit-book.jsp?id=<%= book.getId() %>" class="btn btn-outline-warning">
+                                        <a href="edit-book?id=<%= book.getId() %>" class="btn btn-outline-warning">
                                             Edit
                                         </a>
                                     </div>
