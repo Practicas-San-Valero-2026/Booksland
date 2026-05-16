@@ -36,7 +36,7 @@ public class EditBook extends HttpServlet {
             List<Author> authors = authorDAO.findAll();
             request.setAttribute("authors", authors);
 
-            if (idParam != null && idParam.isEmpty() && isPositiveInt(idParam)) {
+            if (idParam != null && !idParam.isEmpty() && isPositiveInt(idParam)) {
                 int bookId = Integer.parseInt(idParam);
                 Book book = bookDAO.getById(bookId);
 
