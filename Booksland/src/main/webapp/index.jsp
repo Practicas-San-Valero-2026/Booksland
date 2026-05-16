@@ -16,29 +16,34 @@
                             line-height: 0.95;
                             letter-spacing: -0.04em;
                             margin: 0;
-                            background: linear-gradient(90deg, #6b5746 0%, #8b7765 50%, #b29d88 100%);
+                            background: linear-gradient(90deg, #fa7402 0%, #e18b3a 50%, #facda0 100%);
                             -webkit-background-clip: text;
                             -webkit-text-fill-color: transparent;
                             background-clip: text;
                             text-shadow: 0 6px 18px rgba(107, 87, 70, 0.10);
                         }
 
-                        .hero-subtitle {
-                            font-size: 1.2rem;
-                            max-width: 620px;
+                        .btn-books {
+                            background-color: #a86b3c;
+                            border-color: #ef750e;
+                            color: #fff;
                         }
 
-                        .hero-badge {
-                            letter-spacing: 0.08em;
-                            text-transform: uppercase;
-                        }
+                            .btn-books:hover,
+                            .btn-books:focus,
+                            .btn-books:active {
+                                background-color: #af5100;
+                                border-color: #954300;
+                                color: #fff;
+                            }
                     </style>
+
                     <h2 class="display-5 fw-bold lh-1 mb-3">
                         Your next adventure starts here
                     </h2>
 
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="<%= contextPath %>/books" class="btn btn-secondary btn-lg px-4">
+                        <a href="<%= contextPath %>/books" class="btn btn-books btn-lg px-4">
                             Books
                         </a>
                         <a href="<%= contextPath %>/authors" class="btn btn-outline-secondary btn-lg px-4">
