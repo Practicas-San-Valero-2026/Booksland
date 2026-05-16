@@ -30,6 +30,7 @@ El objetivo principal es desarrollar una aplicación web que permita interactuar
 - HTML
 - CSS
 - Bootstrap
+- AJAX
 - JSP
 
 ### Base de datos
