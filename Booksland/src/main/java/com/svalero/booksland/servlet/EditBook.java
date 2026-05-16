@@ -1,7 +1,9 @@
 package com.svalero.booksland.servlet;
 
+import com.svalero.booksland.dao.AuthorDAO;
 import com.svalero.booksland.dao.BookDAO;
 import com.svalero.booksland.dao.Database;
+import com.svalero.booksland.model.Author;
 import com.svalero.booksland.model.Book;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.svalero.booksland.dao.Database.jdbi;
 
@@ -28,6 +31,10 @@ public class EditBook extends HttpServlet {
             Database.connect();
 
             BookDAO bookDAO = jdbi.onDemand(BookDAO.class);
+            AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
+
+            List<Author> authors = authorDAO.findAll();
+            request.setAttribute("authors", authors);
 
             if (idParam != null && idParam.isEmpty() && isPositiveInt(idParam)) {
                 int bookId = Integer.parseInt(idParam);
