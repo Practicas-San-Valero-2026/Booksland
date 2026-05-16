@@ -76,11 +76,11 @@
                                     </div>
 
                                     <div class="col-4 d-grid">
-                                        <a href="remove-book?id=<%= book.getId() %>"
+                                        <button href="remove-book?id=<%= book.getId() %>"
                                            class="btn btn-outline-danger"
-                                           onclick="return confirm('Are you sure you want to delete this book?');">
+                                           onclick="deleteBook(<%= book.getId() %>, this)">
                                             Delete
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -103,5 +103,28 @@
         </div>
     </div>
 </main>
+<script>
+    function deleteBook(id, button) {
+        if (!confirm("Are you sure you want to delete this book?")) {
+            return;
+        }
+
+        fetch("remove-book?id=" + id, {
+            method: "GET"
+        })
+            .then(response => {
+                if (response.ok) {
+                    const card = button.closest(".col");
+                    card.remove();
+                } else {
+                    alert("Error deleting book");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Connection error");
+            });
+    }
+</script>
 
 <%@include file="includes/footer.jsp"%>

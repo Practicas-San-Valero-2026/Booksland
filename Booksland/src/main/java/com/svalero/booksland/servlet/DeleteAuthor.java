@@ -34,11 +34,13 @@ public class DeleteAuthor extends HttpServlet {
             AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
             authorDAO.delete(id);
 
-            response.sendRedirect("authors");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().write("Author deleted correctly");
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("authors?error=author-has-books");
+            // Error de conflicto
+            response.sendError(409, "It has been impossible to remove the author because it may have registered books.");
         }
     }
 }

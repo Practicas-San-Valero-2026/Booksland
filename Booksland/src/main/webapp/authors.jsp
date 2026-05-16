@@ -86,11 +86,11 @@
                                     </div>
 
                                     <div class="col-4 d-grid">
-                                        <a href="remove-author?id=<%= author.getId() %>"
+                                        <button href="remove-author?id=<%= author.getId() %>"
                                            class="btn btn-outline-danger"
-                                           onclick="return confirm('Are you sure you want to delete this author?');">
+                                           onclick="deleteAuthor(<%= author.getId() %>, this)">
                                             Delete
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -113,5 +113,31 @@
         </div>
     </div>
 </main>
+
+<script>
+    function deleteAuthor(id, button) {
+        if (!confirm("Are you sure you want to delete this author?")) {
+            return;
+        }
+
+        fetch("remove-author?id=" + id, {
+            method: "GET"
+        })
+            .then(response => {
+                if (response.ok) {
+                    const card = button.closest(".col");
+                    card.remove();
+                } else if (response.status === 409) {
+                    alert("This author cannot be deleted because they have registered books.");
+                } else {
+                    alert("Error deleting author");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Connection error");
+            });
+    }
+</script>
 
 <%@include file="includes/footer.jsp"%>
