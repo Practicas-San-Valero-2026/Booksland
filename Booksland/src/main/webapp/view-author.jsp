@@ -42,7 +42,7 @@
 
             <div class="d-grid">
               <a href="<%= request.getContextPath() %>/view-book?id=<%= book.getId() %>"
-                 class="btn btn-outline-primary btn-sm">
+                 class="btn btn-outline-secondary btn-sm">
                 See book
               </a>
             </div>

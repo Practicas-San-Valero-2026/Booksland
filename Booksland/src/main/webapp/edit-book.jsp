@@ -112,7 +112,7 @@
             </div>
 
             <div class="d-flex gap-2">
-              <button type="submit" id="save-button" class="btn btn-primary">
+              <button type="submit" id="save-button" class="btn btn-secondary">
                 <%= editMode ? "Save changes" : "Add book" %>
               </button>
 
