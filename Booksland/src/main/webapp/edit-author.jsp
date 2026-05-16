@@ -70,7 +70,7 @@
 
                         <div class="mb-3">
                             <label for="genre" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name"
+                            <input type="text" class="form-control" id="lastName" name="lastName"
                                    value="<%= author.getLastName() %>" required>
                         </div>
 
@@ -80,11 +80,7 @@
                                    value="<%= author.getNationality() %>">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="biography" class="form-textarea">Biography</label>
-                            <textarea class="form-control" id="biography" name="biography" rows="5">
-                                <%= author.getBiography() != null ? author.getBiography() : "" %></textarea>
-                        </div>
+                        <textarea class="form-control" id="biography" name="biography" rows="5"><%= author.getBiography() != null ? author.getBiography() : "" %></textarea>
 
                         <div class="d-flex gap-2">
                             <button type="submit" id="save-button" class="btn btn-primary">Save changes</button>
