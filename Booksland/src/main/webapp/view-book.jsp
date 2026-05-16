@@ -45,7 +45,7 @@
                         </a>
 
                         <a href="<%= request.getContextPath() %>/edit-book?id=<%= book.getId() %>"
-                           class="btn btn-outline-primary">
+                           class="btn btn-outline-secondary">
                             Edit book
                         </a>
                     </div>
