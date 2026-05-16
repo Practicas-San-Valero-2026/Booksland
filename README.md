@@ -128,14 +128,17 @@ Las páginas JSP se encuentran en:
   * `includes`
     * `footer.jsp`
     * `header.jsp`
+  * `META-INF`
+    * `context.xml`
   * `WEB-INF`
-    * `authors.jsp`
-    * `books.jsp`
-    * `edit-author.jsp`
-    * `edit-book.jsp`
-    * `index.jsp`
-    * `view-author.jsp`
-    * `view-book.jsp`
+     * `web.xml`
+  * `authors.jsp`
+  * `books.jsp`
+  * `edit-author.jsp`
+  * `edit-book.jsp`
+  * `index.jsp`
+  * `view-author.jsp`
+  * `view-book.jsp`
 
 ### Pasos de instalación
 1. Clonar el repositorio:
