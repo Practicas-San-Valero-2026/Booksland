@@ -22,31 +22,24 @@ public class EditBook extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = request.getParameter("id");
-
-        if (id == null || id.isEmpty()) {
-            response.sendError(400, "Missing book id");
-            return;
-        }
+        String idParam = request.getParameter("id");
 
         try {
             Database.connect();
 
-            int bookId = Integer.parseInt(id);
-
             BookDAO bookDAO = jdbi.onDemand(BookDAO.class);
-            Book book = bookDAO.getById(bookId);
 
-            if (book == null) {
-                response.sendError(404, "Book not found");
-                return;
+            if (idParam != null && idParam.isEmpty() && isPositiveInt(idParam)) {
+                int bookId = Integer.parseInt(idParam);
+                Book book = bookDAO.getById(bookId);
+
+                if (book != null) {
+                    request.setAttribute("book", book);
+                }
             }
 
-            request.setAttribute("book", book);
             request.getRequestDispatcher("/edit-book.jsp").forward(request, response);
 
-        } catch (NumberFormatException e) {
-            response.sendError(400, "Invalid book id");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(500, "Loading error");
@@ -57,8 +50,7 @@ public class EditBook extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-        String id = request.getParameter("id");
+        String idParam = request.getParameter("id");
 
         String titleParam = request.getParameter("title");
         String genreParam = request.getParameter("genre");
@@ -100,7 +92,7 @@ public class EditBook extends HttpServlet {
 
             BookDAO bookDAO = jdbi.onDemand(BookDAO.class);
 
-            if ("Registrar".equals(action)) {
+            if (!isPositiveInt(idParam)) {
 
                 bookDAO.add(
                         titleParam,
@@ -114,17 +106,7 @@ public class EditBook extends HttpServlet {
 
             } else {
 
-                if (isEmpty(id)) {
-                    sendError(response, "Missing id");
-                    return;
-                }
-
-                if (!isPositiveInt(id)) {
-                    sendError(response, "Invalid book id");
-                    return;
-                }
-
-                int bookId = Integer.parseInt(id);
+                int bookId = Integer.parseInt(idParam);
 
                 bookDAO.modify(
                         titleParam,
