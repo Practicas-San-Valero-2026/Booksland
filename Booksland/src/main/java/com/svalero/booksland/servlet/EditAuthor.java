@@ -2,18 +2,56 @@ package com.svalero.booksland.servlet;
 
 import com.svalero.booksland.dao.AuthorDAO;
 import com.svalero.booksland.dao.Database;
+import com.svalero.booksland.model.Author;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
 
 import static com.svalero.booksland.dao.Database.jdbi;
 
+@MultipartConfig
 @WebServlet("/edit-author")
 public class EditAuthor extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String id = request.getParameter("id");
+
+        if (id == null || id.isEmpty()) {
+            response.sendError(400, "Missing book id");
+            return;
+        }
+
+        try {
+            Database.connect();
+
+            int authorId = Integer.parseInt(id);
+
+            AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
+            Author author = authorDAO.getById(authorId);
+
+            if (author == null) {
+                response.sendError(404, "Author not found");
+                return;
+            }
+
+            request.setAttribute("author", author);
+            request.getRequestDispatcher("/edit-author.jsp").forward(request, response);
+
+        } catch (NumberFormatException e) {
+            response.sendError(400, "Invalid author id");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(500, "Loading error");
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

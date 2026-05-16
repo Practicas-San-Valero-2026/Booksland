@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="col-md-2 d-grid">
-                                <a href="<%= contextPath %>/edit-author.jsp" class="btn btn-primary">
+                                <a href="<%= contextPath %>/edit-author" class="btn btn-primary">
                                     Add author
                                 </a>
                             </div>
@@ -80,7 +80,7 @@
                                     </div>
 
                                     <div class="col-4 d-grid">
-                                        <a href="edit-author.jsp?id=<%= author.getId() %>" class="btn btn-outline-warning">
+                                        <a href="edit-author?id=<%= author.getId() %>" class="btn btn-outline-warning">
                                             Edit
                                         </a>
                                     </div>

@@ -24,7 +24,7 @@
                         <form action="books" method="get" class="row g-2">
                             <div class="col-md-5">
                                 <input type="text" name="search" class="form-control"
-                                       placeholder="Search by name..." value="<%= search %>">
+                                       placeholder="Search by title..." value="<%= search %>">
                             </div>
 
                             <div class="col-md-2 d-grid">
