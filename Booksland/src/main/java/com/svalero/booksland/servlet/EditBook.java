@@ -65,7 +65,7 @@ public class EditBook extends HttpServlet {
         String publisherParam = request.getParameter("publisher");
         String idAuthorParam = request.getParameter("idAuthor");
 
-        // Validaciones básicas
+        // Basic validations
         if (isEmpty(titleParam)) {
             sendError(response, "Missing title");
             return;
