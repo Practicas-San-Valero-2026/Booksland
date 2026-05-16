@@ -21,10 +21,81 @@
     </div>
     <% } %>
 
+    <style>
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 5.8rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin: 0;
+            background: linear-gradient(90deg, #6b5746 0%, #8b7765 50%, #b29d88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 6px 18px rgba(107, 87, 70, 0.10);
+        }
+
+        .btn-search {
+            background-color: #a86b3c;
+            border-color: #ef750e;
+            color: #fff;
+        }
+
+        .btn-search:hover,
+        .btn-search:focus,
+        .btn-search:active {
+            background-color: #af5100;
+            border-color: #5c4b3d;
+            color: #fff;
+        }
+
+        .btn-add-author {
+            background-color: #8b7765;
+            border-color: #8b7765;
+            color: #fff;
+        }
+
+        .btn-add-author:hover,
+        .btn-add-author:focus,
+        .btn-add-author:active {
+            background-color: #786555;
+            border-color: #786555;
+            color: #fff;
+        }
+
+        .btn-details {
+            background-color: transparent;
+            border-color: #a1866f;
+            color: #a1866f;
+        }
+
+        .btn-details:hover,
+        .btn-details:focus,
+        .btn-details:active {
+            background-color: #a1866f;
+            border-color: #a1866f;
+            color: #fff;
+        }
+
+        .btn-edit {
+            background-color: transparent;
+            border-color: #5b4a3b;
+            color: #5b4a3b;
+        }
+
+        .btn-edit:hover,
+        .btn-edit:focus,
+        .btn-edit:active {
+            background-color: #5b4a3b;
+            border-color: #5b4a3b;
+            color: #fff;
+        }
+    </style>
+
     <section class="py-4 text-center container">
         <div class="row py-lg-3">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <h1 class="fw-light">Authors</h1>
+                <h1 class="hero-title">Authors</h1>
                 <p class="lead text-body-secondary mb-3">
                     Have a look at available authors.
                 </p>
@@ -38,11 +109,11 @@
                             </div>
 
                             <div class="col-md-2 d-grid">
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" class="btn btn-search">Search</button>
                             </div>
 
                             <div class="col-md-2 d-grid">
-                                <a href="<%= contextPath %>/edit-author" class="btn btn-primary">
+                                <a href="<%= contextPath %>/edit-author" class="btn btn-add-author">
                                     Add author
                                 </a>
                             </div>
@@ -74,13 +145,13 @@
                             <div class="mt-auto">
                                 <div class="row g-2">
                                     <div class="col-4 d-grid">
-                                        <a href="view-author?id=<%= author.getId() %>" class="btn btn-outline-primary">
+                                        <a href="view-author?id=<%= author.getId() %>" class="btn btn-details">
                                             Details
                                         </a>
                                     </div>
 
                                     <div class="col-4 d-grid">
-                                        <a href="edit-author?id=<%= author.getId() %>" class="btn btn-outline-warning">
+                                        <a href="edit-author?id=<%= author.getId() %>" class="btn btn-edit">
                                             Edit
                                         </a>
                                     </div>
