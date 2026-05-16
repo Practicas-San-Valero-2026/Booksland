@@ -1,8 +1,10 @@
 package com.svalero.booksland.servlet;
 
 import com.svalero.booksland.dao.AuthorDAO;
+import com.svalero.booksland.dao.BookDAO;
 import com.svalero.booksland.dao.Database;
 import com.svalero.booksland.model.Author;
+import com.svalero.booksland.model.Book;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.svalero.booksland.dao.Database.jdbi;
 
@@ -22,31 +25,24 @@ public class EditAuthor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = request.getParameter("id");
-
-        if (id == null || id.isEmpty()) {
-            response.sendError(400, "Missing book id");
-            return;
-        }
+        String idParam = request.getParameter("id");
 
         try {
             Database.connect();
 
-            int authorId = Integer.parseInt(id);
-
             AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
-            Author author = authorDAO.getById(authorId);
 
-            if (author == null) {
-                response.sendError(404, "Author not found");
-                return;
+            if (idParam != null && !idParam.isEmpty() && isPositiveInt(idParam)) {
+                int authorId = Integer.parseInt(idParam);
+                Author author = authorDAO.getById(authorId);
+
+                if (author != null) {
+                    request.setAttribute("author", author);
+                }
             }
 
-            request.setAttribute("author", author);
             request.getRequestDispatcher("/edit-author.jsp").forward(request, response);
 
-        } catch (NumberFormatException e) {
-            response.sendError(400, "Invalid author id");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(500, "Loading error");
@@ -57,15 +53,14 @@ public class EditAuthor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-        String id = request.getParameter("id");
+        String idParam = request.getParameter("id");
 
         String nameParam = request.getParameter("name");
         String lastNameParam = request.getParameter("lastName");
         String nationalityParam = request.getParameter("nationality");
         String biographyParam = request.getParameter("biography");
 
-        // Validaciones básicas
+        // Basic validations
         if (isEmpty(nameParam)) {
             sendError(response, "Missing name");
             return;
@@ -78,22 +73,19 @@ public class EditAuthor extends HttpServlet {
 
         try {
             Database.connect();
+
             AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
 
-            if ("Registrar".equals(action)) {
+            if (!isPositiveInt(idParam)) {
 
                 authorDAO.add(nameParam, lastNameParam, nationalityParam, biographyParam);
 
                 sendSuccess(response, "Author added correctly");
 
             } else {
+                int authorId = Integer.parseInt(idParam);
 
-                if (isEmpty(id)) {
-                    sendError(response, "Missing id");
-                    return;
-                }
-
-                authorDAO.modify(nameParam, lastNameParam, nationalityParam, biographyParam, Integer.parseInt(id));
+                authorDAO.modify(nameParam, lastNameParam, nationalityParam, biographyParam, authorId);
 
                 sendSuccess(response, "Author modified correctly");
             }
@@ -106,6 +98,14 @@ public class EditAuthor extends HttpServlet {
 
     private boolean isEmpty(String value) {
         return value == null || value.trim().isEmpty();
+    }
+
+    private boolean isPositiveInt(String value) {
+        try {
+            return Integer.parseInt(value) > 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private void sendSuccess(HttpServletResponse response, String message) throws IOException {
