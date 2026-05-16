@@ -186,6 +186,7 @@
 </main>
 
 <script>
+    // FETCH FUNCTION TO DELETE AUTHORS
     function deleteAuthor(id, button) {
         if (!confirm("Are you sure you want to delete this author?")) {
             return;

@@ -174,6 +174,7 @@
     </div>
 </main>
 <script>
+    // FETCH FUNCTION TO DELETE BOOKS
     function deleteBook(id, button) {
         if (!confirm("Are you sure you want to delete this book?")) {
             return;

@@ -1,10 +1,8 @@
 package com.svalero.booksland.servlet;
 
 import com.svalero.booksland.dao.AuthorDAO;
-import com.svalero.booksland.dao.BookDAO;
 import com.svalero.booksland.dao.Database;
 import com.svalero.booksland.model.Author;
-import com.svalero.booksland.model.Book;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.MultipartConfig;
 
 import java.io.IOException;
-import java.util.List;
 
 import static com.svalero.booksland.dao.Database.jdbi;
 
@@ -76,12 +73,14 @@ public class EditAuthor extends HttpServlet {
 
             AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
 
+            // Add author because id is not existing (not a possitive number)
             if (!isPositiveInt(idParam)) {
 
                 authorDAO.add(nameParam, lastNameParam, nationalityParam, biographyParam);
 
                 sendSuccess(response, "Author added correctly");
 
+                // modifying author because the id is existing
             } else {
                 int authorId = Integer.parseInt(idParam);
 

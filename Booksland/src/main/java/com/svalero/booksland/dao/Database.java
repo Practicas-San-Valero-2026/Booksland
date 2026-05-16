@@ -20,7 +20,7 @@ public class Database {
 
         try (InputStream input = Database.class.getClassLoader().getResourceAsStream("db.properties")) {
             if (input == null) {
-                throw new RuntimeException("No se encontró el archivo db.properties en resources");
+                throw new RuntimeException("There is not any db.properties file in the resources directory");
             }
 
             Properties properties = new Properties();
@@ -31,7 +31,7 @@ public class Database {
             String password = properties.getProperty("db.password");
 
             if (url == null || user == null || password == null) {
-                throw new RuntimeException("Faltan propiedades de la base de datos en db.properties");
+                throw new RuntimeException("There are properties missing in the databse inside the file: db.properties");
             }
 
             Class.forName("org.mariadb.jdbc.Driver");
@@ -40,7 +40,7 @@ public class Database {
             jdbi.installPlugin(new SqlObjectPlugin());
 
         } catch (Exception e) {
-            throw new RuntimeException("Error al inicializar la conexión con la base de datos", e);
+            throw new RuntimeException("Error trying to initialize the connection to the database", e);
         }
     }
 
