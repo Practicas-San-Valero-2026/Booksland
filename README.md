@@ -144,7 +144,7 @@ Las páginas JSP se encuentran en:
 git clone https://github.com/Practicas-San-Valero-2026/Booksland.git
 ```
 
-2. Importar la base de datos en MariaDB usando el archivo SQL incluido en el proyecto.
+2. Importar la base de datos en MariaDB usando el archivo SQL `dump-booksland.sql` ejecutando las peticiones en orden.
 
 3. Configurar los datos de conexión a la base de datos en el archivo correspondiente:
 - host
