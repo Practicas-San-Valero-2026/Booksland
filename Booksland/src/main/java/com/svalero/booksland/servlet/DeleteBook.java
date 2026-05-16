@@ -35,7 +35,8 @@ public class DeleteBook extends HttpServlet {
             BookDAO bookDAO = jdbi.onDemand(BookDAO.class);
             bookDAO.delete(id);
 
-            response.sendRedirect("books");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().write("Book deleted correctly");
 
         } catch (Exception e) {
             e.printStackTrace();
