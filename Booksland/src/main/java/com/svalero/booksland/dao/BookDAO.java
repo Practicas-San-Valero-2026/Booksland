@@ -37,7 +37,7 @@ public interface BookDAO {
     @UseRowMapper(BookMapper.class)
     List<Book> getByAuthor(int idAuthor);
 
-    // search
+    // search by title
     @SqlQuery("SELECT * FROM books WHERE title LIKE CONCAT('%', ?, '%')")
     @UseRowMapper(BookMapper.class)
     List<Book> search(String title);

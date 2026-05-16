@@ -32,7 +32,7 @@ public interface AuthorDAO {
     @UseRowMapper(AuthorMapper.class)
     Author getById(int id);
 
-    // search
+    // search by name and/or last name
     @SqlQuery("""
     SELECT * FROM authors
     WHERE name LIKE ?

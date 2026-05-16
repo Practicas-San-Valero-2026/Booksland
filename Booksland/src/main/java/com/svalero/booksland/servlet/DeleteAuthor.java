@@ -39,7 +39,7 @@ public class DeleteAuthor extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            // Error de conflicto
+            // Conflict error
             response.sendError(409, "It has been impossible to remove the author because it may have registered books.");
         }
     }

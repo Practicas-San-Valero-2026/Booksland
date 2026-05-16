@@ -24,7 +24,7 @@ public class ViewAuthor extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
 
-        // Validar id
+        // Validate id
         if (id == null || id.isEmpty()) {
             response.sendError(400, "Missing the author's id");
             return;
@@ -48,7 +48,7 @@ public class ViewAuthor extends HttpServlet {
 
             List<Book> books = bookDAO.getByAuthor(authorId);
 
-            // Mandar datos al JSP
+            // Send data to JSP
             request.setAttribute("author", author);
             request.setAttribute("books", books);
             request.getRequestDispatcher("/view-author.jsp").forward(request, response);
