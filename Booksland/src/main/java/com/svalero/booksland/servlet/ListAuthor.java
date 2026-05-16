@@ -27,12 +27,14 @@ public class ListAuthor extends HttpServlet {
             AuthorDAO authorDAO = jdbi.onDemand(AuthorDAO.class);
 
             String search = request.getParameter("search");
+            List<Author> authors;
 
-            if (search == null) {
-                search = "";
+            if (search == null || search.trim().isEmpty()) {
+                authors = authorDAO.findAll();
+            } else {
+                String pattern = "%" + search.trim() + "%";
+                authors = authorDAO.search(pattern, pattern, pattern);
             }
-
-            List<Author> authors = authorDAO.search(search, "");
 
             request.setAttribute("authors", authors);
             request.setAttribute("search", search);

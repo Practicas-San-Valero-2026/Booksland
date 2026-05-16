@@ -33,7 +33,12 @@ public interface AuthorDAO {
     Author getById(int id);
 
     // search
-    @SqlQuery("SELECT * FROM authors WHERE name LIKE CONCAT('%', ?, '%') AND last_name LIKE CONCAT('%', ?, '%')")
+    @SqlQuery("""
+    SELECT * FROM authors
+    WHERE name LIKE ?
+       OR last_name LIKE ?
+       OR CONCAT(name, ' ', last_name) LIKE ?
+""")
     @UseRowMapper(AuthorMapper.class)
-    List<Author> search(String name, String lastName);
+    List<Author> search(String search1, String search2, String search3);
 }
