@@ -1,4 +1,6 @@
 <%@ page import="com.svalero.booksland.model.Book" %>
+<%@ page import="com.svalero.booksland.model.Author" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="includes/header.jsp"%>
 
@@ -45,6 +47,8 @@
 
 <%
   Book book = (Book) request.getAttribute("book");
+  List<Author> authors = (List<Author>) request.getAttribute("authors");
+
   boolean editMode = book != null;
 %>
 
@@ -91,9 +95,20 @@
             </div>
 
             <div class="mb-4">
-              <label for="idAuthor" class="form-label">Author id</label>
-              <input type="number" min="1" class="form-control" id="idAuthor" name="idAuthor"
-                     value="<%= editMode ? book.getIdAuthor() : "" %>" required>
+              <label for="idAuthor" class="form-label">Author</label>
+
+              <select class="form-select" id="idAuthor" name="idAuthor" required>
+                <option value="">Select an author</option>
+
+                <% if (authors != null) { %>
+                <% for (Author author : authors) { %>
+                <option value="<%= author.getId() %>"
+                        <%= editMode && book.getIdAuthor() == author.getId() ? "selected" : "" %>>
+                  <%= author.getName() %> <%= author.getLastName() %>
+                </option>
+                <% } %>
+                <% } %>
+              </select>
             </div>
 
             <div class="d-flex gap-2">
